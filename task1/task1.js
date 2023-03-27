@@ -1,9 +1,8 @@
 const reverseString = (str) => {
-    const words = str.split(/\W|_/).reverse();
+    const words = str.split(/\W+/).reverse().filter((item) => item !== '');
 
-    const separatorsResult = str.matchAll(/\W|_/g);
+    const separatorsResult = str.matchAll(/\W+|_/g);
     const separators = Array.from(separatorsResult);
-
 
     let result = '';
     for(let i = 0; i < words.length; i++) {
@@ -12,4 +11,5 @@ const reverseString = (str) => {
     return result
 }
 
-console.log(reverseString('a,b$c_d'));
+console.log(reverseString('Ab,c,de$!'));
+console.log(reverseString('a,b$c'));
