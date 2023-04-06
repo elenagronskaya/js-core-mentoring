@@ -10,7 +10,7 @@ const getLettersAndSymbols = function (str) {
     }, {words: [], symbols: []})
 }
 
-const wordReverse = function (str) {
+const stringReverse = function (str) {
     console.log(str)
     let indexObj = getLettersAndSymbols(str);
     return [...str].reduce((revOrder, item) => {
@@ -44,4 +44,4 @@ const randomString = (length) => {
     return randomStringChar
 }
 
-console.log(wordReverse(randomString(10)))
+console.log(stringReverse(randomString(10)))
