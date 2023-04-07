@@ -10,7 +10,7 @@ const getLettersAndSymbols = function (str) {
     }, {words: [], symbols: []})
 }
 
-const stringReverse = function (str) {
+export const stringReverse = function (str) {
     console.log(str)
     let indexObj = getLettersAndSymbols(str);
     return [...str].reduce((revOrder, item) => {
