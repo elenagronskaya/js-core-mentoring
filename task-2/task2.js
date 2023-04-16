@@ -1,7 +1,9 @@
+const condition = code => (code >= 'a'.charCodeAt() && code <= 'z'.charCodeAt()) || (code >= 'A'.charCodeAt() && code <= 'Z'.charCodeAt())
+
 const getLettersAndSymbols = function (str) {
     return [...str].reduce((indexObj, item, index) => {
         let code = item.charCodeAt();
-        if((code >= 'a'.charCodeAt() && code <= 'z'.charCodeAt()) || (code >= 'A'.charCodeAt() && code <= 'Z'.charCodeAt())) {
+        if(condition(code)) {
             indexObj.words.push(index)
         } else {
             indexObj.symbols.push(index)
@@ -15,7 +17,7 @@ const stringReverse = function (str) {
     let indexObj = getLettersAndSymbols(str);
     return [...str].reduce((revOrder, item) => {
         let code = item.charCodeAt();
-        if ((code >= 'a'.charCodeAt() && code <= 'z'.charCodeAt()) || (code >= 'A'.charCodeAt() && code <= 'Z'.charCodeAt())) {
+        if (condition(code)) {
             revOrder[indexObj.words.pop()] = item
         } else {
             revOrder[indexObj.symbols.shift()] = item
@@ -24,10 +26,12 @@ const stringReverse = function (str) {
     }, []).join('')
 }
 
-function insertSeparator(separators, resultRandomString) {
-    let separator = separators[Math.floor(Math.random() * separators.length)];
+const randomItem = length => Math.floor(Math.random() * length);
 
-    let indexToInsertSeparator = Math.floor(Math.random() * resultRandomString.length);
+function insertSeparator(separators, resultRandomString) {
+    let separator = separators[randomItem(separators.length)];
+
+    let indexToInsertSeparator = randomItem(resultRandomString.length);
 
     const leftString = resultRandomString.slice(0, indexToInsertSeparator);
     const rightString = resultRandomString.slice(indexToInsertSeparator, resultRandomString.length - 1)
@@ -41,7 +45,7 @@ const randomString = (length) => {
     const separators = '@$,!'.split('');
 
     for(let i = 0; i < length; i++) {
-        const letterIndex = Math.floor(Math.random() * letters.length);
+        const letterIndex = randomItem(letters.length);
         resultRandomString += letters.charAt(letterIndex);
     }
 
